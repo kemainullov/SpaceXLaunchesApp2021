@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">SpaceXLaunchesApp</string>
+
+    <!--  menu_upcoming_launches  -->
+    <string name="past_launches_fragment_title">Past launches</string>
+
+    <!--  UpcomingLaunchesFragment  -->
+    <string name="upcoming_launches">Upcoming launches</string>
+
+    <!--  PastLaunchesFragment  -->
+    <string name="past_launches">Past launches</string>
+
+    <!--  LaunchFragment  -->
+    <string name="launch">Launch</string>
+
 </resources>
