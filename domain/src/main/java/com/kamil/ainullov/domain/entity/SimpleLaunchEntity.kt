@@ -6,6 +6,6 @@ data class SimpleLaunchEntity(
     val name: String,
     val details: String,
     val success: Boolean,
-    val data: Long,
-    val dataFormatted: String
+    val date: Long,
+    val dateFormatted: String
 )

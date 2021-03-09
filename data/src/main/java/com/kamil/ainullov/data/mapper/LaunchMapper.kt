@@ -4,9 +4,9 @@ import com.kamil.ainullov.data.model.LaunchData
 import com.kamil.ainullov.data.utils.ext.parseDate
 import com.kamil.ainullov.domain.entity.LaunchEntity
 
-class LaunchMapper : Mapper<LaunchEntity, LaunchData> {
+class LaunchMapper : Mapper<LaunchData, LaunchEntity> {
 
-    override fun mapTo(from: LaunchData): LaunchEntity {
+    override fun mapFrom(from: LaunchData): LaunchEntity {
         return LaunchEntity(
             id = from.id,
             icon = from.links.patch.small,
