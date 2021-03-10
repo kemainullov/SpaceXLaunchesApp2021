@@ -6,33 +6,43 @@ import com.kamil.ainullov.domain.repository.UpcomingLaunchesRepository
 import com.kamil.ainullov.domain.usecase.GetLaunchUseCase
 import com.kamil.ainullov.domain.usecase.GetPastLaunchesUseCase
 import com.kamil.ainullov.domain.usecase.GetUpcomingLaunchesUseCase
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-//
+
 //@Module
 //@InstallIn(ActivityComponent::class)
-//object UseCaseModule {
+//abstract class UseCaseModule {
 //
-//    @Provides
-//    fun provideGetLaunchUseCase(
-//        launchRepository: LaunchRepository
-//    ): GetLaunchUseCase {
-//        return GetLaunchUseCase(launchRepository)
-//    }
+////    @Binds
+////    abstract fun provideGetLaunchUseCase(getLaunchUseCase: GetLaunchUseCase): GetLaunchUseCase
+////
+////     @Binds
+////    abstract fun provideGetPastLaunchesUseCase(getPastLaunchesUseCase: GetPastLaunchesUseCase): GetPastLaunchesUseCase
+////
+////     @Binds
+////    abstract fun provideGetUpcomingLaunchesUseCase(getUpcomingLaunchesUseCase: GetUpcomingLaunchesUseCase): GetUpcomingLaunchesUseCase
 //
-//    @Provides
-//    fun provideGetPastLaunchesUseCase(
-//        pastLaunchesRepository: PastLaunchesRepository
-//    ): GetPastLaunchesUseCase {
-//        return GetPastLaunchesUseCase(pastLaunchesRepository)
-//    }
-//
-//    @Provides
-//    fun provideGetUpcomingLaunchesUseCase(
-//        upcomingLaunchesRepository: UpcomingLaunchesRepository
-//    ): GetUpcomingLaunchesUseCase {
-//        return GetUpcomingLaunchesUseCase(upcomingLaunchesRepository)
-//    }
+////    @Provides
+////    fun provideGetLaunchUseCase(
+////        launchRepository: LaunchRepository
+////    ): GetLaunchUseCase {
+////        return GetLaunchUseCase(launchRepository)
+////    }
+////
+////    @Provides
+////    fun provideGetPastLaunchesUseCase(
+////        pastLaunchesRepository: PastLaunchesRepository
+////    ): GetPastLaunchesUseCase {
+////        return GetPastLaunchesUseCase(pastLaunchesRepository)
+////    }
+////
+////    @Provides
+////    fun provideGetUpcomingLaunchesUseCase(
+////        upcomingLaunchesRepository: UpcomingLaunchesRepository
+////    ): GetUpcomingLaunchesUseCase {
+////        return GetUpcomingLaunchesUseCase(upcomingLaunchesRepository)
+////    }
 //}
