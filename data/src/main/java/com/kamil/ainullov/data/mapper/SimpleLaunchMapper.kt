@@ -3,8 +3,9 @@ package com.kamil.ainullov.data.mapper
 import com.kamil.ainullov.data.model.LaunchData
 import com.kamil.ainullov.data.utils.ext.parseDate
 import com.kamil.ainullov.domain.entity.SimpleLaunchEntity
+import javax.inject.Inject
 
-class SimpleLaunchMapper : Mapper<LaunchData, SimpleLaunchEntity> {
+class SimpleLaunchMapper @Inject constructor() : Mapper<LaunchData, SimpleLaunchEntity> {
 
     override fun mapFrom(from: LaunchData): SimpleLaunchEntity {
         return SimpleLaunchEntity(

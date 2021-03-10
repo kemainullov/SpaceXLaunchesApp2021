@@ -9,16 +9,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class LocalDataSourceModule {
 
     @Binds
     abstract fun provideLaunchesLocalDataSource(launchesLocalDataSourceImpl: LaunchesLocalDataSourceImpl): LaunchesLocalDataSource
-//    @Provides
-//    fun provideLaunchesLocalDataSource(): LaunchesLocalDataSource {
-//        return LaunchesLocalDataSourceImpl() // TODO!
-//    }
 
 }
