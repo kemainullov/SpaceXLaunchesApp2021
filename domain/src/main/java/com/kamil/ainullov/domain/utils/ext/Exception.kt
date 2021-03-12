@@ -1,4 +1,4 @@
-package com.kamil.ainullov.remote.utils.ext
+package com.kamil.ainullov.domain.utils.ext
 
 import com.kamil.ainullov.domain.core.Failure
 import java.lang.Exception
@@ -11,6 +11,6 @@ fun Exception.parseLocalError(): Failure {
         is UnknownHostException -> Failure.NetworkConnectionError
         is TimeoutException -> Failure.TimeoutError
         is SSLException -> Failure.SSLError
-        else -> Failure.NetworkConnectionError
+        else -> Failure.UnknownError
     }
 }

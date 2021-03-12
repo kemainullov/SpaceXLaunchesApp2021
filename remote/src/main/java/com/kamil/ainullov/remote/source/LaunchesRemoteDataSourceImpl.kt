@@ -9,7 +9,7 @@ import com.kamil.ainullov.domain.entity.LaunchEntity
 import com.kamil.ainullov.domain.entity.SimpleLaunchEntity
 import com.kamil.ainullov.domain.utils.ext.mapResult
 import com.kamil.ainullov.domain.utils.ext.mapResultList
-import com.kamil.ainullov.remote.utils.executeRequest
+import com.kamil.ainullov.remote.utils.executeRemoteRequest
 import javax.inject.Inject
 
 class LaunchesRemoteDataSourceImpl @Inject constructor(
@@ -19,15 +19,15 @@ class LaunchesRemoteDataSourceImpl @Inject constructor(
 ) : LaunchesRemoteDataSource {
 
     override suspend fun getPastLaunches(): Result<List<SimpleLaunchEntity>> =
-        executeRequest { launchesApiService.getPastLaunches() }
+        executeRemoteRequest { launchesApiService.getPastLaunches() }
             .mapResultList(simpleLaunchesMapper)
 
     override suspend fun getUpcomingLaunches(): Result<List<SimpleLaunchEntity>> =
-        executeRequest { launchesApiService.getUpcomingLaunches() }
+        executeRemoteRequest { launchesApiService.getUpcomingLaunches() }
             .mapResultList(simpleLaunchesMapper)
 
     override suspend fun getLaunch(id: String): Result<LaunchEntity> =
-        executeRequest { launchesApiService.getLaunch(id) }
+        executeRemoteRequest { launchesApiService.getLaunch(id) }
             .mapResult(launchesMapper)
 
 }

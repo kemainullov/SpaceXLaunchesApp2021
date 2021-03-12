@@ -9,4 +9,5 @@ sealed class Failure {
     object NetworkConnectionError : Failure()
     object TimeoutError : Failure()
     object SSLError : Failure()
+    object UnknownError: Failure()
 }

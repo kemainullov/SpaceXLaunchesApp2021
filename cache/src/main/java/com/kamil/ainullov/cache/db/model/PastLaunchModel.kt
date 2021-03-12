@@ -1,7 +1,11 @@
-package com.kamil.ainullov.domain.entity
+package com.kamil.ainullov.cache.db.model
 
-data class LaunchEntity(
-    val id: String,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "past_launch")
+data class  PastLaunchModel(
+    @PrimaryKey val id: String,
     val icon: String?,
     val image: String?,
     val name: String?,
