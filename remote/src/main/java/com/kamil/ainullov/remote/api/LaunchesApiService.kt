@@ -1,6 +1,6 @@
-package com.kamil.ainullov.data.remote.api
+package com.kamil.ainullov.remote.api
 
-import com.kamil.ainullov.data.model.LaunchData
+import com.kamil.ainullov.remote.model.LaunchData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,15 +1,15 @@
-package com.kamil.ainullov.data.remote.source
+package com.kamil.ainullov.remote.source
 
-import com.kamil.ainullov.data.mapper.LaunchMapper
-import com.kamil.ainullov.data.mapper.SimpleLaunchMapper
-import com.kamil.ainullov.data.remote.api.LaunchesApiService
-import com.kamil.ainullov.data.remote.executeRequest
+import com.kamil.ainullov.remote.mapper.LaunchMapper
+import com.kamil.ainullov.remote.mapper.SimpleLaunchMapper
+import com.kamil.ainullov.remote.api.LaunchesApiService
 import com.kamil.ainullov.data.source.LaunchesRemoteDataSource
-import com.kamil.ainullov.data.utils.ext.mapResult
-import com.kamil.ainullov.data.utils.ext.mapResultList
 import com.kamil.ainullov.domain.core.Result
 import com.kamil.ainullov.domain.entity.LaunchEntity
 import com.kamil.ainullov.domain.entity.SimpleLaunchEntity
+import com.kamil.ainullov.domain.utils.ext.mapResult
+import com.kamil.ainullov.domain.utils.ext.mapResultList
+import com.kamil.ainullov.remote.utils.executeRequest
 import javax.inject.Inject
 
 class LaunchesRemoteDataSourceImpl @Inject constructor(

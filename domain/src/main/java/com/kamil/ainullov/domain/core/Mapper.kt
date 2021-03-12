@@ -1,4 +1,4 @@
-package com.kamil.ainullov.data.mapper
+package com.kamil.ainullov.domain.core
 
 interface Mapper<E, D> {
 

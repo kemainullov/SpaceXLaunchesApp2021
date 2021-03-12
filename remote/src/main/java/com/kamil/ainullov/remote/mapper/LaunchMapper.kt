@@ -1,8 +1,9 @@
-package com.kamil.ainullov.data.mapper
+package com.kamil.ainullov.remote.mapper
 
-import com.kamil.ainullov.data.model.LaunchData
-import com.kamil.ainullov.data.utils.ext.parseDate
+import com.kamil.ainullov.remote.model.LaunchData
+import com.kamil.ainullov.domain.core.Mapper
 import com.kamil.ainullov.domain.entity.LaunchEntity
+import com.kamil.ainullov.remote.utils.ext.parseDate
 import javax.inject.Inject
 
 class LaunchMapper @Inject constructor() : Mapper<LaunchData, LaunchEntity> {

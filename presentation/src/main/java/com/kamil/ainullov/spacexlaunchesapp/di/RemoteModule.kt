@@ -2,7 +2,7 @@ package com.kamil.ainullov.spacexlaunchesapp.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.kamil.ainullov.data.remote.api.LaunchesApiService
+import com.kamil.ainullov.remote.api.LaunchesApiService
 import com.kamil.ainullov.spacexlaunchesapp.BuildConfig
 import dagger.Module
 import dagger.Provides

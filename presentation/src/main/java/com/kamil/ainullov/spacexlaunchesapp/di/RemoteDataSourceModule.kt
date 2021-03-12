@@ -1,6 +1,6 @@
 package com.kamil.ainullov.spacexlaunchesapp.di
 
-import com.kamil.ainullov.data.remote.source.LaunchesRemoteDataSourceImpl
+import com.kamil.ainullov.remote.source.LaunchesRemoteDataSourceImpl
 import com.kamil.ainullov.data.source.LaunchesRemoteDataSource
 import dagger.Binds
 import dagger.Module

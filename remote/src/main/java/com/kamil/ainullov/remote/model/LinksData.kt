@@ -1,4 +1,4 @@
-package com.kamil.ainullov.data.model
+package com.kamil.ainullov.remote.model
 
 data class LinksData(
     val patch: PatchData,

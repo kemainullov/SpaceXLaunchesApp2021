@@ -1,4 +1,4 @@
-package com.kamil.ainullov.data.utils.ext
+package com.kamil.ainullov.remote.utils.ext
 
 import java.text.SimpleDateFormat
 import java.util.*

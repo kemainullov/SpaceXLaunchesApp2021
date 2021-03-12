@@ -1,6 +1,6 @@
-package com.kamil.ainullov.data.utils.ext
+package com.kamil.ainullov.domain.utils.ext
 
-import com.kamil.ainullov.data.mapper.Mapper
+import com.kamil.ainullov.domain.core.Mapper
 import com.kamil.ainullov.domain.core.Result
 
 fun <T, E> Result<List<T>>.mapResultList(mapper: Mapper<T, E>): Result<List<E>> {
