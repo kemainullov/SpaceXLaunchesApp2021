@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/upcoming_launches_dest"
-        android:name="com.kamil.ainullov.spacexlaunchesapp.ui.fragment.UpcomingLaunchesFragment"
+        android:name="com.kamil.ainullov.spacexlaunchesapp.ui.upcoming_launches.UpcomingLaunchesFragment"
         android:label="UpcomingLaunchesFragment">
         <action
             android:id="@+id/actionToPastLaunchesFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/past_launches_dest"
-        android:name="com.kamil.ainullov.spacexlaunchesapp.ui.fragment.PastLaunchesFragment"
+        android:name="com.kamil.ainullov.spacexlaunchesapp.ui.past_launches.PastLaunchesFragment"
         android:label="PastLaunchesFragment" >
         <action
             android:id="@+id/actionToLaunchFragment"
@@ -25,6 +25,6 @@
     </fragment>
     <fragment
         android:id="@+id/launch_dest"
-        android:name="com.kamil.ainullov.spacexlaunchesapp.ui.fragment.LaunchFragment"
+        android:name="com.kamil.ainullov.spacexlaunchesapp.ui.launch.LaunchFragment"
         android:label="LaunchFragment" />
 </navigation>

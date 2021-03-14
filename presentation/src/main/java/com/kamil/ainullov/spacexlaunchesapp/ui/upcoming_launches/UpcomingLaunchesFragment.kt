@@ -1,17 +1,22 @@
-package com.kamil.ainullov.spacexlaunchesapp.ui.fragment
+package com.kamil.ainullov.spacexlaunchesapp.ui.upcoming_launches
 
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.kamil.ainullov.spacexlaunchesapp.R
 import com.kamil.ainullov.spacexlaunchesapp.base.BaseFragment
 import com.kamil.ainullov.spacexlaunchesapp.databinding.FragmentUpcomingLaunchesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UpcomingLaunchesFragment : BaseFragment() {
 
     private var _binding: FragmentUpcomingLaunchesBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: UpcomingLaunchesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

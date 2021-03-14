@@ -1,0 +1,13 @@
+package com.kamil.ainullov.domain.core
+
+sealed class Failure {
+    object ServerError : Failure()
+    object ServerUnknownError : Failure()
+    object UnauthorizedError : Failure()
+    object UnknownLoginError : Failure()
+
+    object NetworkConnectionError : Failure()
+    object TimeoutError : Failure()
+    object SSLError : Failure()
+    object UnknownError: Failure()
+}

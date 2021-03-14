@@ -1,4 +1,6 @@
 package com.kamil.ainullov.spacexlaunchesapp.base
 
-class BaseViewModel {
+import androidx.lifecycle.ViewModel
+
+abstract class BaseViewModel: ViewModel() {
 }
