@@ -1,4 +1,4 @@
-package com.kamil.ainullov.spacexlaunchesapp.di
+package com.kamil.ainullov.cache.di
 
 import android.content.Context
 import androidx.room.Room

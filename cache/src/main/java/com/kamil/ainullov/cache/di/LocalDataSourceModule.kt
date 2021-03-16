@@ -1,4 +1,4 @@
-package com.kamil.ainullov.spacexlaunchesapp.di
+package com.kamil.ainullov.cache.di
 
 import com.kamil.ainullov.cache.source.LaunchesLocalDataSourceImpl
 import com.kamil.ainullov.data.source.LaunchesLocalDataSource
