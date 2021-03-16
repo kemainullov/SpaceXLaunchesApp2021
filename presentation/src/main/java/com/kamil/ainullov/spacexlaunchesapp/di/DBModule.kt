@@ -3,6 +3,7 @@ package com.kamil.ainullov.spacexlaunchesapp.di
 import android.content.Context
 import androidx.room.Room
 import com.kamil.ainullov.cache.db.AppDatabase
+import com.kamil.ainullov.cache.db.dao.LaunchDao
 import com.kamil.ainullov.cache.db.dao.PastLaunchesDao
 import com.kamil.ainullov.cache.db.dao.UpcomingLaunchesDao
 import dagger.Module
@@ -24,6 +25,11 @@ object DBModule {
             AppDatabase::class.java,
             "database-spacex-launches"
         ).build()
+    }
+
+    @Provides
+    fun provideLaunchDao(appDatabase: AppDatabase): LaunchDao {
+        return appDatabase.launchDao()
     }
 
     @Provides
