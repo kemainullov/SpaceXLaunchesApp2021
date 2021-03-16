@@ -12,7 +12,6 @@ import com.kamil.ainullov.spacexlaunchesapp.R
 import com.kamil.ainullov.spacexlaunchesapp.base.BaseFragment
 import com.kamil.ainullov.spacexlaunchesapp.databinding.FragmentLaunchBinding
 import com.kamil.ainullov.spacexlaunchesapp.utils.ext.openWeb
-import com.kamil.ainullov.spacexlaunchesapp.utils.ext.setVisible
 import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,26 +47,31 @@ class LaunchFragment : BaseFragment() {
                 is State.Loading -> binding.progress.root.visibility = View.VISIBLE
                 is State.Success -> setLaunchData(state.data)
                 is State.Error -> {
+                    binding.clParent.visibility = View.GONE
                     binding.progress.root.visibility = View.GONE
+                    handleError(state) { viewModel.getLaunch(args.launchId) }
                 }
             }
         })
     }
 
     private fun setLaunchData(launch: LaunchEntity) {
-        binding.ivLaunch.load(launch.image) {
-            listener { _, _ -> binding.progress.root.visibility = View.GONE }
-        }
+        if (!launch.image.isNullOrBlank()) {
+            binding.ivLaunch.load(launch.image) {
+                listener { _, _ -> binding.progress.root.visibility = View.GONE }
+            }
+        } else binding.progress.root.visibility = View.GONE
         binding.ivLaunch.setOnClickListener { launch.image.openWeb(requireContext()) }
         binding.tvName.text = launch.name
         binding.tvDate.text = launch.dateFormatted
         binding.tvDetails.text = launch.details
-        binding.tvDetails.setVisible(!launch.details.isNullOrEmpty())
-        binding.groupResult.setVisible(launch.success != null)
+        binding.tvDetails.visibility = if (!launch.details.isNullOrEmpty()) View.VISIBLE else View.GONE
+        binding.groupResult.visibility = if (launch.success != null) View.VISIBLE else View.GONE
         binding.ivResult.setImageResource(if (launch.success == true) R.drawable.ic_checked else R.drawable.ic_cancel)
-        binding.groupWebcast.setVisible(!launch.webcast.isNullOrEmpty())
+        binding.groupWebcast.visibility = if (!launch.webcast.isNullOrEmpty()) View.VISIBLE else View.GONE
         binding.ivWebcast.setOnClickListener { launch.webcast.openWeb(requireContext()) }
         binding.tvReadMore.setOnClickListener { launch.article.openWeb(requireContext()) }
+        binding.clParent.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {

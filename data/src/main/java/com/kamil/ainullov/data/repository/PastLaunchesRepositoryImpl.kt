@@ -21,7 +21,7 @@ class PastLaunchesRepositoryImpl @Inject constructor(
             is Result.Success -> launch { launchesLocalDataSource.savePastLaunches((result as Result.Success).data) }
             is Result.Error -> when (val localResult =
                 launchesLocalDataSource.getPastLaunches()) {
-                is Result.Success -> result = localResult
+                is Result.Success -> { if (localResult.data.isNotEmpty()) result = localResult }
             }
         }
         result

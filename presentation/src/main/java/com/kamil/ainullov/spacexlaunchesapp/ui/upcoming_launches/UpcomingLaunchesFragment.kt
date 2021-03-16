@@ -50,6 +50,7 @@ class UpcomingLaunchesFragment : BaseFragment() {
                 }
                 is State.Error -> {
                     binding.progress.root.visibility = View.GONE
+                    handleError(state) { viewModel.getUpcomingLaunches() }
                 }
             }
         })

@@ -23,7 +23,7 @@ class UpcomingLaunchesRepositoryImpl @Inject constructor(
             is Result.Success -> launch { launchesLocalDataSource.saveUpcomingLaunches((result as Result.Success).data) }
             is Result.Error -> when (val localResult =
                 launchesLocalDataSource.getUpcomingLaunches()) {
-                is Result.Success -> result = localResult
+                is Result.Success -> { if (localResult.data.isNotEmpty()) result = localResult }
             }
         }
         result
