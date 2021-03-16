@@ -1,14 +1,15 @@
 package com.kamil.ainullov.spacexlaunchesapp.ui.past_launches
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kamil.ainullov.spacexlaunchesapp.R
 import com.kamil.ainullov.spacexlaunchesapp.base.BaseFragment
 import com.kamil.ainullov.spacexlaunchesapp.databinding.FragmentPastLaunchesBinding
+import com.kamil.ainullov.spacexlaunchesapp.ui.past_launches.adapter.PastLaunchesAdapter
 import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,8 +18,15 @@ class PastLaunchesFragment : BaseFragment() {
 
     private var _binding: FragmentPastLaunchesBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: PastLaunchesAdapter
 
     private val viewModel: PastLaunchesViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        viewModel.getPastLaunches()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,16 +36,11 @@ class PastLaunchesFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setActionBarData(getString(R.string.past_launches), true)
+        setActionBarData(getString(R.string.past_launches))
+        initAdapter()
         observeStates()
-        viewModel.getPastLaunches()
     }
 
     private fun observeStates() {
@@ -46,16 +49,43 @@ class PastLaunchesFragment : BaseFragment() {
                 is State.Default -> {
                 }
                 is State.Loading -> {
-                    binding.pbLoading.visibility = View.VISIBLE
+                    binding.progress.root.visibility = View.VISIBLE
                 }
                 is State.Success -> {
-                    binding.pbLoading.visibility = View.GONE
-                    state.data // can use
+                    binding.progress.root.visibility = View.GONE
+                    adapter.updateData(state.data.reversed())
                 }
                 is State.Error -> {
+                    binding.progress.root.visibility = View.GONE
                 }
             }
         })
+    }
+
+    private fun initAdapter() {
+        adapter = PastLaunchesAdapter(mutableListOf()) { launch ->
+            onGoToLaunch(launch.id)
+        }
+        binding.rvLaunches.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvLaunches.adapter = adapter
+    }
+
+    private fun onGoToLaunch(launchId: String) {
+        val action = PastLaunchesFragmentDirections.actionToLaunchFragment(launchId)
+        findNavController().navigate(action)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
+        inflater.inflate(R.menu.menu_past_launches, menu)
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        NavigationUI.onNavDestinationSelected(item, findNavController())
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

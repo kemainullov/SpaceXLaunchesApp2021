@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">SpaceXLaunchesApp</string>
+    <string name="app_name">SpaceX Launches</string>
 
-    <!--  menu_upcoming_launches  -->
-    <string name="past_launches_fragment_title">Past launches</string>
+    <!--  menu_past_launches  -->
+    <string name="upcoming_launches_fragment_title">Upcoming launches</string>
 
     <!--  UpcomingLaunchesFragment  -->
     <string name="upcoming_launches">Upcoming launches</string>
@@ -12,5 +12,12 @@
 
     <!--  LaunchFragment  -->
     <string name="launch">Launch</string>
+    <string name="launch_is_successful">Launch is successful:</string>
+    <string name="webcast_on_youtube">Webcast on youtube:</string>
+    <string name="read_more">Read more…</string>
+
+    <!--  Extensions  -->
+    <string name="incorrect_link">Incorrect link</string>
+
 
 </resources>
