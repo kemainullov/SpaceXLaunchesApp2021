@@ -1,4 +1,4 @@
-package com.kamil.ainullov.spacexlaunchesapp.di
+package com.kamil.ainullov.remote.di
 
 import com.kamil.ainullov.remote.source.LaunchesRemoteDataSourceImpl
 import com.kamil.ainullov.data.source.LaunchesRemoteDataSource

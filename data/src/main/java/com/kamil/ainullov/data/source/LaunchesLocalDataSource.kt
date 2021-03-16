@@ -8,19 +8,14 @@ interface LaunchesLocalDataSource {
 
     suspend fun getPastLaunches(): Result<List<SimpleLaunchEntity>>
 
-    suspend fun getPastLaunch(id: String): Result<LaunchEntity>
-
     suspend fun savePastLaunches(launches: List<SimpleLaunchEntity>)
 
-    suspend fun savePastLaunch(launch: LaunchEntity)
+    suspend fun getLaunch(id: String): Result<LaunchEntity>
 
+    suspend fun saveLaunch(launch: LaunchEntity)
 
     suspend fun getUpcomingLaunches(): Result<List<SimpleLaunchEntity>>
 
-    suspend fun getUpcomingLaunch(id: String): Result<LaunchEntity>
-
     suspend fun saveUpcomingLaunches(launches: List<SimpleLaunchEntity>)
-
-    suspend fun saveUpcomingLaunch(launch: LaunchEntity)
 
 }

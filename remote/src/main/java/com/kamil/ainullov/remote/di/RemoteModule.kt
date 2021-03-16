@@ -1,9 +1,9 @@
-package com.kamil.ainullov.spacexlaunchesapp.di
+package com.kamil.ainullov.remote.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.kamil.ainullov.remote.BuildConfig
 import com.kamil.ainullov.remote.api.LaunchesApiService
-import com.kamil.ainullov.spacexlaunchesapp.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

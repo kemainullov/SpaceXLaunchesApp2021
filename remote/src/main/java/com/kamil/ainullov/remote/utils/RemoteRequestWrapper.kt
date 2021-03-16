@@ -9,7 +9,7 @@ import java.lang.Exception
 suspend fun <T : Any> executeRemoteRequest(request: suspend () -> Response<T>): Result<T> {
     return try {
         val response = request()
-        if (response.isSuccessful) {
+        if (response.isSuccessful && response.body() != null) {
             Result.Success(response.body()!!)
         } else {
             Result.Error(response.parseServerError())

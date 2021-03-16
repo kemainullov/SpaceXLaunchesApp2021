@@ -3,8 +3,8 @@ package com.kamil.ainullov.cache.db.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "past_launch")
-data class  PastLaunchModel(
+@Entity(tableName = "launch")
+data class LaunchModel(
     @PrimaryKey val id: String,
     val icon: String?,
     val image: String?,

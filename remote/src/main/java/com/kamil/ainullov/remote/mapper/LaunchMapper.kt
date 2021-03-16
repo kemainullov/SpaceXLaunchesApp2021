@@ -12,7 +12,7 @@ class LaunchMapper @Inject constructor() : Mapper<LaunchData, LaunchEntity> {
         return LaunchEntity(
             id = from.id,
             icon = from.links?.patch?.small,
-            image = from.links?.flickr?.original?.first(),
+            image = from.links?.flickr?.original?.firstOrNull(),
             name = from.name,
             details = from.details,
             success = from.success,

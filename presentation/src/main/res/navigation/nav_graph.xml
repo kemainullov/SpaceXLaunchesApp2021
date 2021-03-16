@@ -2,23 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/upcoming_launches_dest">
+    app:startDestination="@id/past_launches_dest">
 
     <fragment
         android:id="@+id/upcoming_launches_dest"
         android:name="com.kamil.ainullov.spacexlaunchesapp.ui.upcoming_launches.UpcomingLaunchesFragment"
-        android:label="UpcomingLaunchesFragment">
-        <action
-            android:id="@+id/actionToPastLaunchesFragment"
-            app:destination="@id/past_launches_dest" />
-        <action
-            android:id="@+id/actionToLaunchFragment"
-            app:destination="@id/launch_dest" />
-    </fragment>
+        android:label="UpcomingLaunchesFragment"/>
     <fragment
         android:id="@+id/past_launches_dest"
         android:name="com.kamil.ainullov.spacexlaunchesapp.ui.past_launches.PastLaunchesFragment"
-        android:label="PastLaunchesFragment" >
+        android:label="PastLaunchesFragment">
+        <action
+            android:id="@+id/actionToUpcomingLaunchesFragment"
+            app:destination="@id/upcoming_launches_dest" />
         <action
             android:id="@+id/actionToLaunchFragment"
             app:destination="@id/launch_dest" />
@@ -26,5 +22,10 @@
     <fragment
         android:id="@+id/launch_dest"
         android:name="com.kamil.ainullov.spacexlaunchesapp.ui.launch.LaunchFragment"
-        android:label="LaunchFragment" />
+        android:label="LaunchFragment">
+        <argument
+            android:name="launchId"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>

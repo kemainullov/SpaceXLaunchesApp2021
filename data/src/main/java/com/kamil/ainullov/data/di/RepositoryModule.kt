@@ -1,4 +1,4 @@
-package com.kamil.ainullov.spacexlaunchesapp.di
+package com.kamil.ainullov.data.di
 
 import com.kamil.ainullov.data.repository.LaunchRepositoryImpl
 import com.kamil.ainullov.data.repository.PastLaunchesRepositoryImpl

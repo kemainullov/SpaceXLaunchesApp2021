@@ -13,6 +13,8 @@ fun <T> Response<T>.parseServerError(): Failure {
 //            errorMessage = message
 //        }
 //    }
+    if (body() == null)
+        return Failure.ResponseIsNullError
 
     return when (code()) {
         401 -> Failure.UnauthorizedError
