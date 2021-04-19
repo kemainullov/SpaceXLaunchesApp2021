@@ -3,6 +3,9 @@ package com.kamil.ainullov.spacexlaunchesapp.ui.past_launches
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +15,8 @@ import com.kamil.ainullov.spacexlaunchesapp.databinding.FragmentPastLaunchesBind
 import com.kamil.ainullov.spacexlaunchesapp.ui.past_launches.adapter.PastLaunchesAdapter
 import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PastLaunchesFragment : BaseFragment() {
@@ -44,23 +49,27 @@ class PastLaunchesFragment : BaseFragment() {
     }
 
     private fun observeStates() {
-        viewModel.pastLaunchesState.observe(viewLifecycleOwner, { state ->
-            when (state) {
-                is State.Default -> {
-                }
-                is State.Loading -> {
-                    binding.progress.root.visibility = View.VISIBLE
-                }
-                is State.Success -> {
-                    binding.progress.root.visibility = View.GONE
-                    adapter.updateData(state.data.reversed())
-                }
-                is State.Error -> {
-                    binding.progress.root.visibility = View.GONE
-                    handleError(state) { viewModel.getPastLaunches() }
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.pastLaunchesState.collect { state ->
+                    when (state) {
+                        is State.Default -> {
+                        }
+                        is State.Loading -> {
+                            binding.progress.root.visibility = View.VISIBLE
+                        }
+                        is State.Success -> {
+                            binding.progress.root.visibility = View.GONE
+                            adapter.updateData(state.data.reversed())
+                        }
+                        is State.Error -> {
+                            binding.progress.root.visibility = View.GONE
+                            handleError(state) { viewModel.getPastLaunches() }
+                        }
+                    }
                 }
             }
-        })
+        }
     }
 
     private fun initAdapter() {

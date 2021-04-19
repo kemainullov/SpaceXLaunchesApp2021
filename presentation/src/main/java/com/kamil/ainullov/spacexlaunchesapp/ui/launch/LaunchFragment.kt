@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.kamil.ainullov.domain.entity.LaunchEntity
@@ -14,6 +17,8 @@ import com.kamil.ainullov.spacexlaunchesapp.databinding.FragmentLaunchBinding
 import com.kamil.ainullov.spacexlaunchesapp.utils.ext.openWeb
 import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LaunchFragment : BaseFragment() {
@@ -40,19 +45,21 @@ class LaunchFragment : BaseFragment() {
     }
 
     private fun observeStates() {
-        viewModel.launchState.observe(viewLifecycleOwner, { state ->
-            when (state) {
-                is State.Default -> {
+        lifecycleScope.launch {
+            viewModel.launchState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { state ->
+                    when (state) {
+                        is State.Default -> {}
+                        is State.Loading -> binding.progress.root.visibility = View.VISIBLE
+                        is State.Success -> setLaunchData(state.data)
+                        is State.Error -> {
+                            binding.clParent.visibility = View.GONE
+                            binding.progress.root.visibility = View.GONE
+                            handleError(state) { viewModel.getLaunch(args.launchId) }
+                        }
+                    }
                 }
-                is State.Loading -> binding.progress.root.visibility = View.VISIBLE
-                is State.Success -> setLaunchData(state.data)
-                is State.Error -> {
-                    binding.clParent.visibility = View.GONE
-                    binding.progress.root.visibility = View.GONE
-                    handleError(state) { viewModel.getLaunch(args.launchId) }
-                }
-            }
-        })
+        }
     }
 
     private fun setLaunchData(launch: LaunchEntity) {
