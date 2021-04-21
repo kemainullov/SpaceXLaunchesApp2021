@@ -15,17 +15,38 @@ import javax.inject.Inject
 @HiltViewModel
 class PastLaunchesViewModel @Inject constructor(
     private val getPastLaunchesUseCase: GetPastLaunchesUseCase
-): BaseViewModel() {
+): BaseViewModel<PastLaunchesContract.Event, PastLaunchesContract.State, PastLaunchesContract.Effect>() {
 
-    private val _pastLaunchesState = MutableStateFlow<State<List<SimpleLaunchEntity>>>(State.Default)
-    val pastLaunchesState: StateFlow<State<List<SimpleLaunchEntity>>> get() = _pastLaunchesState
+    /**
+     * Create initial State of Views
+     */
+    override fun createInitialState() =
+        PastLaunchesContract.State(PastLaunchesContract.PastLaunchesState.Idle)
 
-    fun getPastLaunches() {
-        _pastLaunchesState.value = State.Loading
+    /**
+     * Handle each event
+     */
+    override fun handleEvent(event: PastLaunchesContract.Event) {
+        when (event) {
+            is PastLaunchesContract.Event.GetPastLaunches -> getPastLaunches()
+        }
+    }
+
+    private fun getPastLaunches() {
         viewModelScope.launch {
+            // Set Loading
+            setState { copy(pastLaunchesState = PastLaunchesContract.PastLaunchesState.Loading) }
             when (val result = getPastLaunchesUseCase.invoke(Unit)) {
-                is Result.Success -> _pastLaunchesState.value = State.Success(result.data)
-                is Result.Error -> _pastLaunchesState.value = State.Error(result.failure)
+                is Result.Success -> {
+                    // Update state
+                    setState { copy(pastLaunchesState = PastLaunchesContract.PastLaunchesState.Success(launches = result.data)) }
+                }
+                is Result.Error -> {
+                    // Update state
+                    setState { copy(pastLaunchesState = PastLaunchesContract.PastLaunchesState.Idle) }
+                    // Show error
+                    setEffect { PastLaunchesContract.Effect.ShowErrorDialog(result.failure) }
+                }
             }
         }
     }

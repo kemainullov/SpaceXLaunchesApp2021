@@ -1,6 +1,7 @@
 package com.kamil.ainullov.spacexlaunchesapp.ui.past_launches
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -30,7 +31,7 @@ class PastLaunchesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        viewModel.getPastLaunches()
+        viewModel.setEvent(PastLaunchesContract.Event.GetPastLaunches)
     }
 
     override fun onCreateView(
@@ -51,20 +52,32 @@ class PastLaunchesFragment : BaseFragment() {
     private fun observeStates() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.pastLaunchesState.collect { state ->
-                    when (state) {
-                        is State.Default -> {
+                // Collect ui state
+                viewModel.uiState.collect {
+                    when (it.pastLaunchesState) {
+                        is PastLaunchesContract.PastLaunchesState.Idle -> {
+                            binding.progress.root.visibility = View.GONE
                         }
-                        is State.Loading -> {
+                        is PastLaunchesContract.PastLaunchesState.Loading -> {
                             binding.progress.root.visibility = View.VISIBLE
                         }
-                        is State.Success -> {
+                        is PastLaunchesContract.PastLaunchesState.Success -> {
                             binding.progress.root.visibility = View.GONE
-                            adapter.updateData(state.data.reversed())
+                            adapter.updateData(it.pastLaunchesState.launches.reversed())
                         }
-                        is State.Error -> {
-                            binding.progress.root.visibility = View.GONE
-                            handleError(state) { viewModel.getPastLaunches() }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            // Collect side effects
+            viewModel.effect.collect {
+                when (it) {
+                    is PastLaunchesContract.Effect.ShowErrorDialog -> {
+                        binding.progress.root.visibility = View.GONE
+                        handleError(it.failure) {
+                            viewModel.setEvent(PastLaunchesContract.Event.GetPastLaunches)
                         }
                     }
                 }

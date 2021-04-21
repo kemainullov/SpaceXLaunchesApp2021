@@ -22,8 +22,8 @@ abstract class BaseFragment : Fragment() {
         toast.show()
     }
 
-    open fun handleError(error: State.Error, action: () -> Unit) {
-        val errorMsg = when (error.failure) {
+    open fun handleError(failure: Failure, action: () -> Unit) {
+        val errorMsg = when (failure) {
             is Failure.NetworkConnectionError -> getString(R.string.no_internet_connection)
             else -> getString(R.string.unknown_error)
         }

@@ -1,6 +1,7 @@
 package com.kamil.ainullov.spacexlaunchesapp.ui.launch
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,24 +42,44 @@ class LaunchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setActionBarData(getString(R.string.launch), true)
         observeStates()
-        viewModel.getLaunch(args.launchId)
+        viewModel.setEvent(LaunchContract.Event.GetLaunch(args.launchId))
     }
 
     private fun observeStates() {
         lifecycleScope.launch {
-            viewModel.launchState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect { state ->
-                    when (state) {
-                        is State.Default -> {}
-                        is State.Loading -> binding.progress.root.visibility = View.VISIBLE
-                        is State.Success -> setLaunchData(state.data)
-                        is State.Error -> {
-                            binding.clParent.visibility = View.GONE
+            // Collect ui state
+            viewModel.uiState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    when (it.launchState) {
+                        is LaunchContract.LaunchState.Idle -> {
+                            binding.progress.root.visibility = View.VISIBLE
                             binding.progress.root.visibility = View.GONE
-                            handleError(state) { viewModel.getLaunch(args.launchId) }
+                        }
+                        is LaunchContract.LaunchState.Loading -> {
+                            binding.progress.root.visibility = View.VISIBLE
+                        }
+                        is LaunchContract.LaunchState.Success -> {
+                            binding.progress.root.visibility = View.VISIBLE
+                            binding.progress.root.visibility = View.GONE
+                            setLaunchData(it.launchState.launch)
                         }
                     }
                 }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            // Collect side effects
+            viewModel.effect.collect {
+                when (it) {
+                    is LaunchContract.Effect.ShowErrorDialog -> {
+                        binding.clParent.visibility = View.GONE
+                        binding.progress.root.visibility = View.GONE
+                        handleError(it.failure) {
+                            viewModel.setEvent(LaunchContract.Event.GetLaunch(args.launchId))
+                        }
+                    }
+                }
+            }
         }
     }
 

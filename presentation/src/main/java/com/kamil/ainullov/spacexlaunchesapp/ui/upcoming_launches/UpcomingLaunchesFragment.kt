@@ -38,26 +38,38 @@ class UpcomingLaunchesFragment : BaseFragment() {
         setActionBarData(getString(R.string.upcoming_launches), true)
         initAdapter()
         observeStates()
-        viewModel.getUpcomingLaunches()
+        viewModel.setEvent(UpcomingLaunchesContract.Event.GetUpcomingLaunches)
     }
 
     private fun observeStates() {
         lifecycleScope.launch {
-            viewModel.upcomingLaunchesState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect { state ->
-                    when (state) {
-                        is State.Default -> {
-                        }
-                        is State.Loading -> {
-                            binding.progress.root.visibility = View.VISIBLE
-                        }
-                        is State.Success -> {
+            // Collect ui state
+            viewModel.uiState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                when (it.upcomingLaunchesState) {
+                    is UpcomingLaunchesContract.UpcomingLaunchesState.Idle -> {
+                        binding.progress.root.visibility = View.GONE
+                    }
+                    is UpcomingLaunchesContract.UpcomingLaunchesState.Loading -> {
+                        binding.progress.root.visibility = View.VISIBLE
+                    }
+                    is UpcomingLaunchesContract.UpcomingLaunchesState.Success -> {
+                        binding.progress.root.visibility = View.GONE
+                        adapter.updateData(it.upcomingLaunchesState.launches)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            // Collect side effects
+            viewModel.effect.collect {
+                    when (it) {
+                        is UpcomingLaunchesContract.Effect.ShowErrorDialog -> {
                             binding.progress.root.visibility = View.GONE
-                            adapter.updateData(state.data)
-                        }
-                        is State.Error -> {
-                            binding.progress.root.visibility = View.GONE
-                            handleError(state) { viewModel.getUpcomingLaunches() }
+                            handleError(it.failure) {
+                                viewModel.setEvent(UpcomingLaunchesContract.Event.GetUpcomingLaunches)
+                            }
                         }
                     }
                 }
