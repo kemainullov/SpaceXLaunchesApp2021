@@ -4,7 +4,7 @@
 В приложении присутствует локальное хранении полученных данных и отображении их в случае отсутствия интернета или при проблемах на сервере.  
 
 **Стек технологий:**  
-Clean architecture, MVVM, Kotlin Coroutines, Hilt, Navigation, Room, Retrofit 2, Coil, ViewBinding.  
+Clean architecture, MVVM/MVI (реализации в разных ветках), Kotlin Coroutines, Hilt, Navigation, Room, Retrofit 2, Coil, ViewBinding.  
 
 **Проект разделен на несколько модулей:**  
 Presentation - отвечает за ui. (Activity, Fragments, ViewModels, etc)  
