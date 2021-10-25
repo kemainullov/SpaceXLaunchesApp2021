@@ -1,16 +1,16 @@
 # SpaceXLaunchesApp
-Получение и отображение данных о запусках ракет компанией SpaceX.  
-В приложении 3 экрана: "Прошедшие запуски", "Предстоящие запуски" и "Детальная информация о прошедшем запуске".  
-В приложении присутствует локальное хранении полученных данных и отображении их в случае отсутствия интернета или при проблемах на сервере.  
+Receiving and displaying data on rocket launches by SpaceX.
+There are 3 screens in the app: "Past launches", "Upcoming launches" and "Detailed information about the last launch".
+The application contains local storage of the received data and displaying them in the absence of the internet or in case of problems on the server.
 
-**Стек технологий:**  
+**Stack:**  
 Clean architecture, MVVM/MVI (реализации в разных ветках), Kotlin Coroutines, Hilt, Navigation, Room, Retrofit 2, Coil, ViewBinding.  
 
-**Проект разделен на несколько модулей:**  
-Presentation - отвечает за ui. (Activity, Fragments, ViewModels, etc)  
-Domain - бизнес-логика. (UseCases, Domain Models, Repository Interfaces, etc)  
-Data - отвечает за предоставление данных. Содержит имплементацию репозиториев из Domain модуля и контракты для модулей Remote и Cache. (Repository Implementation, Source Interfaces, etc)  
-Remote - сетевое взаимодействие. (Networking, Source Implementation, Remote Models, Mappres, etc)  
-Cache - взаимодейстие с БД. (Working with DB, Source Implementation, Cache Models, Mappres, etc)  
+**The project is divided into several modules:**  
+Presentation - responsible for ui. (Activity, Fragments, ViewModels, etc)  
+Domain - business logic. (UseCases, Domain Models, Repository Interfaces, etc)  
+Data - responsible for providing data. Contains the implementation of repositories from the Domain module and contracts for the Remote and Cache modules. (Repository Implementation, Source Interfaces, etc)  
+Remote - networking. (Networking, Source Implementation, Remote Models, Mappres, etc)  
+Cache - interaction with the database. (Working with DB, Source Implementation, Cache Models, Mappres, etc)  
 
-Первоначальная версия, будут доработки.  
+Initial version, there will be improvements.
