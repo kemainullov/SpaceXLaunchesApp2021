@@ -9,11 +9,11 @@ import com.kamil.ainullov.spacexlaunchesapp.databinding.ItemUpcomingLaunchBindin
 class UpcomingLaunchViewHolder(private val itemBinding: ItemUpcomingLaunchBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
-    fun bind(launch: SimpleLaunchEntity) {
+    fun bind(launch: SimpleLaunchEntity) = itemBinding.apply {
         launch.icon?.let {
-            itemBinding.ivLaunchIcon.load(it) { error(R.drawable.ic_rocket) }
+            ivLaunchIcon.load(it) { error(R.drawable.ic_rocket) }
         }
-        itemBinding.tvName.text = launch.name
-        itemBinding.tvDate.text = launch.dateFormatted
+        tvName.text = launch.name
+        tvDate.text = launch.dateFormatted
     }
 }
