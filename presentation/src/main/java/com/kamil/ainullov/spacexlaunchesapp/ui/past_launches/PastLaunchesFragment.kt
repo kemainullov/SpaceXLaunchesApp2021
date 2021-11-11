@@ -14,7 +14,6 @@ import com.kamil.ainullov.spacexlaunchesapp.R
 import com.kamil.ainullov.spacexlaunchesapp.base.BaseFragment
 import com.kamil.ainullov.spacexlaunchesapp.databinding.FragmentPastLaunchesBinding
 import com.kamil.ainullov.spacexlaunchesapp.ui.past_launches.adapter.PastLaunchesAdapter
-import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

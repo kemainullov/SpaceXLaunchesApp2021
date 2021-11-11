@@ -23,12 +23,11 @@ class PastLaunchesContract {
         val pastLaunchesState: PastLaunchesState
     ) : UiState
 
-    // view State that related to past launches
+    // View State that related to past launches
     sealed class PastLaunchesState: UiState {
         object Idle : PastLaunchesState()
         object Loading : PastLaunchesState()
         data class Success(val launches : List<SimpleLaunchEntity>) : PastLaunchesState()
-//        data class Error(val failure: Failure) : PastLaunchesState() // of necessity
     }
 
 }

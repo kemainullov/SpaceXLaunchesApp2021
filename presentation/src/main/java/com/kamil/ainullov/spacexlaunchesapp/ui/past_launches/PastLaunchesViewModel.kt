@@ -2,13 +2,9 @@ package com.kamil.ainullov.spacexlaunchesapp.ui.past_launches
 
 import androidx.lifecycle.viewModelScope
 import com.kamil.ainullov.domain.core.Result
-import com.kamil.ainullov.domain.entity.SimpleLaunchEntity
 import com.kamil.ainullov.domain.usecase.GetPastLaunchesUseCase
 import com.kamil.ainullov.spacexlaunchesapp.base.BaseViewModel
-import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

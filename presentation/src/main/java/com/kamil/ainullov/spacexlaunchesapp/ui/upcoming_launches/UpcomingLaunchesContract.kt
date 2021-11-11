@@ -22,11 +22,10 @@ class UpcomingLaunchesContract {
         val upcomingLaunchesState: UpcomingLaunchesState
     ) : UiState
 
-    // view State that related to upcoming launches
+    // View State that related to upcoming launches
     sealed class UpcomingLaunchesState: UiState {
         object Idle : UpcomingLaunchesState()
         object Loading : UpcomingLaunchesState()
         data class Success(val launches : List<SimpleLaunchEntity>) : UpcomingLaunchesState()
-//        data class Error(val failure: Failure) : UpcomingLaunchesState() // of necessity
     }
 }

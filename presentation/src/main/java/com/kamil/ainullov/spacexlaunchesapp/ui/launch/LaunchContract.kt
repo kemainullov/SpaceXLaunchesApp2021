@@ -23,12 +23,11 @@ class LaunchContract {
         val launchState: LaunchState
     ) : UiState
 
-    // view State that related to launch
+    // View State that related to launch
     sealed class LaunchState: UiState {
         object Idle : LaunchState()
         object Loading : LaunchState()
         data class Success(val launch : LaunchEntity) : LaunchState()
-//        data class Error(val failure: Failure) : LaunchState() // of necessity
     }
 
 }

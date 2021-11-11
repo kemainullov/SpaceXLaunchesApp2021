@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kamil.ainullov.domain.core.Failure
 import com.kamil.ainullov.spacexlaunchesapp.R
-import com.kamil.ainullov.spacexlaunchesapp.utils.state.State
 
 abstract class BaseFragment : Fragment() {
 
@@ -17,9 +16,10 @@ abstract class BaseFragment : Fragment() {
         }
 
     open fun showMessageInCenter(message: String) {
-        val toast = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
-        toast.setGravity(Gravity.CENTER, 0, 0)
-        toast.show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)?.apply {
+            setGravity(Gravity.CENTER, 0, 0)
+            show()
+        }
     }
 
     open fun handleError(failure: Failure, action: () -> Unit) {
