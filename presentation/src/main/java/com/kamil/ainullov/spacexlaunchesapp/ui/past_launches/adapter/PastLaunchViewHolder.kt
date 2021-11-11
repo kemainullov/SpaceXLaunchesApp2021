@@ -9,13 +9,14 @@ import com.kamil.ainullov.spacexlaunchesapp.databinding.ItemPastLaunchBinding
 class PastLaunchViewHolder(private val itemBinding: ItemPastLaunchBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
-    fun bind(launch: SimpleLaunchEntity, onClickListener: (SimpleLaunchEntity) -> Unit) {
-        launch.icon?.let {
-            itemBinding.ivLaunchIcon.load(it) { error(R.drawable.ic_rocket) }
+    fun bind(launch: SimpleLaunchEntity, onClickListener: (SimpleLaunchEntity) -> Unit) =
+        itemBinding.apply {
+            launch.icon?.let {
+                ivLaunchIcon.load(it) { error(R.drawable.ic_rocket) }
+            }
+            tvName.text = launch.name
+            tvDetails.text = launch.details
+            tvDate.text = launch.dateFormatted
+            root.setOnClickListener { onClickListener(launch) }
         }
-        itemBinding.tvName.text = launch.name
-        itemBinding.tvDetails.text = launch.details
-        itemBinding.tvDate.text = launch.dateFormatted
-        itemBinding.root.setOnClickListener { onClickListener(launch) }
-    }
 }
