@@ -62,23 +62,23 @@ class LaunchFragment : BaseFragment() {
         }
     }
 
-    private fun setLaunchData(launch: LaunchEntity) {
+    private fun setLaunchData(launch: LaunchEntity) = binding.apply {
         if (!launch.image.isNullOrBlank()) {
-            binding.ivLaunch.load(launch.image) {
-                listener { _, _ -> binding.progress.root.visibility = View.GONE }
+            ivLaunch.load(launch.image) {
+                listener { _, _ -> progress.root.visibility = View.GONE }
             }
-        } else binding.progress.root.visibility = View.GONE
-        binding.ivLaunch.setOnClickListener { launch.image.openWeb(requireContext()) }
-        binding.tvName.text = launch.name
-        binding.tvDate.text = launch.dateFormatted
-        binding.tvDetails.text = launch.details
-        binding.tvDetails.visibility = if (!launch.details.isNullOrEmpty()) View.VISIBLE else View.GONE
-        binding.groupResult.visibility = if (launch.success != null) View.VISIBLE else View.GONE
-        binding.ivResult.setImageResource(if (launch.success == true) R.drawable.ic_checked else R.drawable.ic_cancel)
-        binding.groupWebcast.visibility = if (!launch.webcast.isNullOrEmpty()) View.VISIBLE else View.GONE
-        binding.ivWebcast.setOnClickListener { launch.webcast.openWeb(requireContext()) }
-        binding.tvReadMore.setOnClickListener { launch.article.openWeb(requireContext()) }
-        binding.clParent.visibility = View.VISIBLE
+        } else progress.root.visibility = View.GONE
+        ivLaunch.setOnClickListener { launch.image.openWeb(requireContext()) }
+        tvName.text = launch.name
+        tvDate.text = launch.dateFormatted
+        tvDetails.text = launch.details
+        tvDetails.visibility = if (!launch.details.isNullOrEmpty()) View.VISIBLE else View.GONE
+        groupResult.visibility = if (launch.success != null) View.VISIBLE else View.GONE
+        ivResult.setImageResource(if (launch.success == true) R.drawable.ic_checked else R.drawable.ic_cancel)
+        groupWebcast.visibility = if (!launch.webcast.isNullOrEmpty()) View.VISIBLE else View.GONE
+        ivWebcast.setOnClickListener { launch.webcast.openWeb(requireContext()) }
+        tvReadMore.setOnClickListener { launch.article.openWeb(requireContext()) }
+        clParent.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {

@@ -17,9 +17,10 @@ abstract class BaseFragment : Fragment() {
         }
 
     open fun showMessageInCenter(message: String) {
-        val toast = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
-        toast.setGravity(Gravity.CENTER, 0, 0)
-        toast.show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)?.apply {
+            setGravity(Gravity.CENTER, 0, 0)
+            show()
+        }
     }
 
     open fun handleError(error: State.Error, action: () -> Unit) {

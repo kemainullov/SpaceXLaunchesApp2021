@@ -8,20 +8,16 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun getNavControllerResId(): Int
 
-    open fun enableBackButton() {
-        supportActionBar?.let {
-            it.setHomeButtonEnabled(true)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setDisplayShowHomeEnabled(true)
-        }
+    open fun enableBackButton() = supportActionBar?.apply {
+        setHomeButtonEnabled(true)
+        setDisplayHomeAsUpEnabled(true)
+        setDisplayShowHomeEnabled(true)
     }
 
-    open fun disableBackButton() {
-        supportActionBar?.let {
-            it.setHomeButtonEnabled(false)
-            it.setDisplayHomeAsUpEnabled(false)
-            it.setDisplayShowHomeEnabled(false)
-        }
+    open fun disableBackButton() = supportActionBar?.apply {
+        setHomeButtonEnabled(false)
+        setDisplayHomeAsUpEnabled(false)
+        setDisplayShowHomeEnabled(false)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
