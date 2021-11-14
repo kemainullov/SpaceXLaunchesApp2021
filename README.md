@@ -4,7 +4,7 @@ There are 3 screens in the app: "Past launches", "Upcoming launches" and "Detail
 The application contains local storage of the received data and displaying them in the absence of the internet or in case of problems on the server.
 
 **Stack:**  
-Clean architecture, MVVM/MVI (реализации в разных ветках), Kotlin Coroutines, Hilt, Navigation, Room, Retrofit 2, Coil, ViewBinding.  
+Clean architecture, MVVM/MVI (implementations in different branches), Kotlin Coroutines, Hilt, Navigation, Room, Retrofit 2, Coil, ViewBinding.  
 
 **The project is divided into several modules:**  
 Presentation - responsible for ui. (Activity, Fragments, ViewModels, etc)  
